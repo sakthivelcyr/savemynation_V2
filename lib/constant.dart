@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Colors
+const fScreen = Color.fromRGBO(0, 74, 173, 0);
 const kBackgroundColor = Color(0xFFFEFEFE);
 const kTitleTextColor = Color(0xFF303030);
 const kBodyTextColor = Color(0xFF4B4B4B);

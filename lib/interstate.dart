@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:imei_plugin/imei_plugin.dart';
 import 'package:location/location.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class InterState extends StatefulWidget {
   @override
@@ -125,7 +126,7 @@ class _InterState extends State<InterState> {
     //encode Map to JSON
     //String body = json.encode(data);
     var sendResponse = await http.post(
-        'https://tailermade.com/savemynation/api/v1/savemynation/citytravel',
+        'https://tailermade.com/savemynation/api/v1/savemynation/statetravel',
         headers: {"Content-Type": "application/x-www-form-urlencoded"},
         body: data,
         encoding: Encoding.getByName("gzip"));
@@ -138,33 +139,13 @@ class _InterState extends State<InterState> {
     return sendResponse;
   }
 
-  Future<void> initPlatformState() async {
-    String platformImei;
-    String idunique;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformImei =
-          await ImeiPlugin.getImei(shouldShowRequestPermissionRationale: true);
-      idunique = await ImeiPlugin.getId();
-      print(platformImei);
-    } catch (e) {
-      print(e);
-      platformImei = 'Failed to get platform version.';
-    }
-    if (!mounted) return;
 
-    setState(() {
-      print(idunique);
-      _platformImei = platformImei;
-      uniqueId = idunique;
-    });
-  }
 
   @override
   void initState() {
     super.initState();
     this.getSTData();
-    initPlatformState();
+
     getLocation();
   }
 
@@ -362,7 +343,10 @@ class _InterState extends State<InterState> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     RaisedButton(
-                      onPressed: () {
+                      onPressed: () async{
+                        SharedPreferences imeiPrefs = await SharedPreferences.getInstance();
+                        String storedIMEI = imeiPrefs.getString('imei');
+                        uniqueId = storedIMEI;
                         setState(() {
                           var i = 0;
                           if (name == null) {
@@ -402,10 +386,16 @@ class _InterState extends State<InterState> {
                                   fontSize: wt / 25);
                             }
                             else {
+                              if(comments==null){
+                                comments = 'empty';
+                              }
+                              if(add==null){
+                                add = 'empty';
+                              }
                               postRequest();
                               Fluttertoast.showToast(
                                   msg:
-                                  "\n Great! We have successfully updated your data \n",
+                                  "We are happy to help you! Our volunteers will get in touch with you soon. ",
                                   toastLength: Toast.LENGTH_LONG,
                                   gravity: ToastGravity.CENTER,
                                   timeInSecForIosWeb: 1,

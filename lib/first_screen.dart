@@ -88,16 +88,20 @@ class _FirstScreenState extends State<FirstScreen> {
     });
     return sendResponse;
   }
-
+  SharedPreferences imeiPrefs;
+  String storedIMEI;
   Future<void> initPlatformState() async {
     String platformImei;
     String idunique;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformImei =
-          await ImeiPlugin.getImei(shouldShowRequestPermissionRationale: true);
+      /*platformImei =
+          await ImeiPlugin.getImei(shouldShowRequestPermissionRationale: true); */
       idunique = await ImeiPlugin.getId();
       print(platformImei);
+      imeiPrefs = await SharedPreferences.getInstance();
+      storedIMEI = imeiPrefs.getString('imei');
+
     } catch (e) {
       print(e);
       platformImei = 'Failed to get platform version.';
@@ -108,15 +112,21 @@ class _FirstScreenState extends State<FirstScreen> {
       print(idunique);
       _platformImei = platformImei;
       uniqueId = idunique;
+      print('uniqy id');
+      imeiPrefs.setString('imei', idunique);
+      print(storedIMEI);
+
+      print(uniqueId);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    this.initPlatformState();
+    //this.initPlatformState();
 
-
+    initPlatformState();
+    getLocation();
     setState(() {
       if (name == null) {
         print('no');
@@ -135,7 +145,8 @@ class _FirstScreenState extends State<FirstScreen> {
       var g = FieldValue.serverTimestamp();
       firebaseToken = token;
     }
-    getLocation();
+
+
     if (name == null) {
       print('no');
       Navigator.pushReplacement(
@@ -223,7 +234,7 @@ class _FirstScreenState extends State<FirstScreen> {
                           await firebaseCloudMessaging();
                           var i = 0;
                           setState(() {
-                            print(_permissionGranted);
+                            //print(_permissionGranted);
                             if (mobnum == null || mobnum.length != 10) {
                               _validateM = true;
                               i = 1;
@@ -293,14 +304,7 @@ class _FirstScreenState extends State<FirstScreen> {
                                     profilePrefs.setString('userEmail', email);
                                     profilePrefs.setString(
                                         'userImageUrl', imageUrl);
-                                    Fluttertoast.showToast(
-                                        msg: toastText.toString(),
-                                        toastLength: Toast.LENGTH_LONG,
-                                        gravity: ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.blue,
-                                        textColor: Colors.white,
-                                        fontSize: wt / 28);
+
                                   });
                                   Navigator.pushReplacement(
                                     context,

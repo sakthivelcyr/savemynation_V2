@@ -1,6 +1,8 @@
 import 'package:savemynation/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:savemynation/profile_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyHeader extends StatefulWidget {
   final String image;
@@ -40,19 +42,36 @@ class _MyHeaderState extends State<MyHeader> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            /*GestureDetector(
-              onTap: () {
+            GestureDetector(
+              onTap: () async{
+                SharedPreferences profilePrefs =
+                    await SharedPreferences.getInstance();
+                String name = profilePrefs.getString('userName');
+                String mobile =
+                profilePrefs.getString('userMobile');
+                String email = profilePrefs.getString('userEmail');
+                String url = profilePrefs.getString('userImageUrl');
+                print(url);
+                SharedPreferences storePrefs =
+                    await SharedPreferences.getInstance();
+                String session =
+                storePrefs.getString("sessionToken");
+                print(session);
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Concerns();
-                    },
-                  ),
-                );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UserProfilePage(
+                            url,
+                            name,
+                            email,
+                            'professional',
+                            'state',
+                            'street',
+                            'district',
+                            mobile)));
               },
               child: SvgPicture.asset("assets/icons/menu.svg"),
-            ),*/
+            ),
             SizedBox(height: 20),
             Expanded(
               child: Stack(

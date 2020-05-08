@@ -35,16 +35,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
   final kTitleStyle = TextStyle(
     color: Colors.white,
-    fontFamily: 'CM Sans Serif',
-    fontSize: 26.0,
-    height: 1.5,
+    fontFamily: 'Poppins',
+    fontSize: 23.0,
+    fontWeight: FontWeight.bold,
+
   );
 
   final kSubtitleStyle = TextStyle(
     color: Colors.white,
-    fontSize: 18.0,
-
-    height: 1.2,
+    fontSize: 19.0,
   );
 
   @override
@@ -60,9 +59,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: Container(
               decoration: bd,
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: wt/10.0),
+                padding: EdgeInsets.symmetric(vertical: wt/20.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Container(
                       height: ht/1.3,
@@ -76,8 +75,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         },
                         children: <Widget>[
                           Padding(
-                            padding: EdgeInsets.all(wt/16.0),
+                            padding: EdgeInsets.all(wt/21.0),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Center(
@@ -89,12 +89,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     width: wt,
                                   ),
                                 ),
-                                SizedBox(height: wt/30.0),
+                                SizedBox(height: wt/7.0),
                                 Text(
-                                  'Student Initiative \nCommunity',
+                                  'Student Initiative Community',
                                   style: kTitleStyle,
                                 ),
-                                SizedBox(height: 15.0),
+                                SizedBox(height: wt/15.0),
                                 Text(
 
                                   'Save My Nation is a student community open source initiative to migrate the impact of COVID-19 using technology as a tool.',
@@ -105,8 +105,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(wt/16.0),
+                            padding: EdgeInsets.all(wt/21.0),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Center(
@@ -118,12 +119,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     width: wt,
                                   ),
                                 ),
-                                SizedBox(height: wt/30.0),
+                                SizedBox(height: wt/7.0),
                                 Text(
-                                  'Live your life smarter\nwith us!',
+                                  'Live your life smarter with us!',
                                   style: kTitleStyle,
                                 ),
-                                SizedBox(height: 15.0),
+                                SizedBox(height: wt/15.0),
                                 Text(
                                   'We are creating platform for victims, government and volunteers and focus on major problems like migration, supply of material to affected victims.',
                                   style: kSubtitleStyle,

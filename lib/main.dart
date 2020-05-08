@@ -81,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(
         children: <Widget>[
           Container(
-            decoration: bd,
+            color: Color.fromRGBO(0, 74, 173, 1),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -92,16 +92,13 @@ class _SplashScreenState extends State<SplashScreen> {
                       image: AssetImage(
                         'assets/icons/icon.png',
                       ),
-                      height: MediaQuery.of(context).size.width/3,
+                      height: MediaQuery.of(context).size.width,
 
                     ),
 
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.width/10,),
-                  Text(
-                    'Save My Nation',
-                    style: ts,
-                  ),
+
+
                 ],
               ),
             ),
@@ -461,7 +458,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(height: wt / 15),
 
-                    Row(
+                    /*Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
@@ -505,7 +502,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ],
-                    ),
+                    ),*/
                     SizedBox(height: wt / 15),
                   ],
                 ),
@@ -531,66 +528,63 @@ class PreventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.width/2.5,
-        child: Stack(
-          alignment: Alignment.centerLeft,
-          children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.width/2.5,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 8),
-                    blurRadius: 24,
-                    color: kShadowColor,
+    return SizedBox(
+      height: MediaQuery.of(context).size.width/2.55,
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.width/2.2,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 8),
+                  blurRadius: 24,
+                  color: kShadowColor,
+                ),
+              ],
+            ),
+          ),
+          Image.asset(image,width: MediaQuery.of(context).size.width/2.5,height: MediaQuery.of(context).size.width,alignment: Alignment.center,),
+          Positioned(
+            left: MediaQuery.of(context).size.width/3.5,
+            top: MediaQuery.of(context).size.width/20,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              height: 136,
+              width: MediaQuery.of(context).size.width/1.7 ,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    title,
+                    style: kTitleTextstyle.copyWith(
+                      fontSize: 16,
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right:10.0),
+                      child: Text(
+                        text,
+                        maxLines: 5,
+                        textAlign: TextAlign.justify,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 13.5,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
-            Image.asset(image,width: MediaQuery.of(context).size.width/2.5,height: MediaQuery.of(context).size.width,alignment: Alignment.center,),
-            Positioned(
-              left: 110,
-              top: 10,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-                height: 136,
-                width: MediaQuery.of(context).size.width/1.7 ,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      title,
-                      style: kTitleTextstyle.copyWith(
-                        fontSize: 16,
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right:10.0),
-                        child: Text(
-                          text,
-                          maxLines: 5,
-                          textAlign: TextAlign.justify,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 13.5,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
